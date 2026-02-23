@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9ba3b0"/>
+      <stop offset="65%" stop-color="#525a67"/>
+      <stop offset="100%" stop-color="#242932"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="900" fill="#e2e2e2"/>
+  <rect x="60" y="80" width="480" height="740" rx="14" fill="url(#g)" stroke="#676f7b" stroke-width="6"/>
+  <g fill="#dfe3ea" opacity="0.95">
+    <rect x="145" y="185" width="60" height="46" rx="6"/>
+    <rect x="270" y="185" width="60" height="46" rx="6"/>
+    <rect x="395" y="185" width="60" height="46" rx="6"/>
+  </g>
+  <text x="300" y="380" text-anchor="middle" fill="#f3f5f8" font-family="Arial, sans-serif" font-size="40" font-weight="700">COVER ART</text>
+  <text x="300" y="435" text-anchor="middle" fill="#f3f5f8" font-family="Arial, sans-serif" font-size="40" font-weight="700">NOT FOUND</text>
+  <text x="300" y="770" text-anchor="middle" fill="#d1d6dd" font-family="Arial, sans-serif" font-size="18">Replace /public/fallback-cover.svg or update FALLBACK_COVER path</text>
+</svg>

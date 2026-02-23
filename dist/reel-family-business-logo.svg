@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#3d3426"/>
+      <stop offset="60%" stop-color="#18191d"/>
+      <stop offset="100%" stop-color="#08090c"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd36b"/>
+      <stop offset="100%" stop-color="#d89a22"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="30" fill="url(#bg)"/>
+  <circle cx="256" cy="180" r="94" fill="#101217" stroke="url(#gold)" stroke-width="8"/>
+  <polygon points="256,94 269,133 309,133 277,157 289,196 256,172 223,196 235,157 203,133 243,133"
+    fill="url(#gold)"/>
+  <rect x="118" y="270" width="276" height="112" rx="14" fill="#0e1016" stroke="#2a2f3b" stroke-width="4"/>
+  <text x="256" y="315" text-anchor="middle" fill="#f4f0e4" font-size="38" font-weight="700" font-family="Georgia, serif">REEL FAMILY</text>
+  <text x="256" y="354" text-anchor="middle" fill="url(#gold)" font-size="26" font-weight="700" font-family="Arial, sans-serif">BUSINESS</text>
+  <text x="256" y="432" text-anchor="middle" fill="#aeb7c4" font-size="16" font-family="Arial, sans-serif">Replace with your final logo file in /public</text>
+</svg>

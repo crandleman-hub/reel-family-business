@@ -318,20 +318,33 @@ textarea {
   background: linear-gradient(180deg, #0f131b, #0b0e14);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
   display: grid;
-  grid-template-columns: 42% 58%;
+  grid-template-columns: 40% 60%;
 }
 
 .entry-cover {
   position: relative;
   min-height: 100%;
   background: #0a0c12;
+  overflow: hidden;
 }
 
 .entry-cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 18%;
   display: block;
+  transform: scale(1.015);
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.entry-cover::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 22%;
+  background: linear-gradient(to top, rgba(4, 5, 8, 0.35), transparent);
+  pointer-events: none;
 }
 
 .badge {
@@ -674,6 +687,8 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
+  display: block;
 }
 
 .lookup-result-title {
@@ -882,7 +897,7 @@ textarea {
   }
 
   .entry-cover {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2 / 3;
   }
 }
 

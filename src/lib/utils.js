@@ -44,3 +44,24 @@ export function parseGenres(value) {
     .map((g) => g.trim())
     .filter(Boolean);
 }
+
+export function optimizeCoverUrl(url) {
+  const raw = String(url || "").trim();
+  if (!raw) return "";
+
+  let next = raw;
+
+  // Google Books thumbnails can often be requested at a higher zoom level.
+  if (next.includes("books.google")) {
+    if (/[?&]zoom=\d/.test(next)) {
+      next = next.replace(/([?&]zoom=)\d/, "$13");
+    } else {
+      next += (next.includes("?") ? "&" : "?") + "zoom=3";
+    }
+  }
+
+  // Amazon/IMDb poster URLs often embed a size token; request a larger source.
+  next = next.replace(/\._V1_[^./]+\./, "._V1_SY1000_CR0,0,675,1000_AL_.");
+
+  return next;
+}

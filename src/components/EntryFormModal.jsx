@@ -1,4 +1,22 @@
 import { useEffect, useMemo, useState } from "react";
+import { optimizeCoverUrl } from "../lib/utils";
+
+const REVIEWER_NAMES = [
+  "Chris",
+  "Alycia",
+  "Jojo",
+  "Liza",
+  "Jeff",
+  "Elias",
+  "Ward",
+  "Pat",
+  "Mike",
+  "Jaunice",
+  "Josh",
+  "Cassandra",
+  "Kona",
+  "Walela"
+];
 
 const GENRE_OPTIONS = [
   "Action",
@@ -80,6 +98,13 @@ export default function EntryFormModal({
     () => (Array.isArray(entry.genres) && entry.genres.length ? entry.genres[0] : "Other"),
     [entry.genres]
   );
+  const reviewerOptions = useMemo(() => {
+    const list = [...REVIEWER_NAMES];
+    if (entry.authorName && !list.includes(entry.authorName)) {
+      list.push(entry.authorName);
+    }
+    return list;
+  }, [entry.authorName]);
 
   if (!open) return null;
 
@@ -104,7 +129,7 @@ export default function EntryFormModal({
       title: result.title || prev.title,
       year: result.year || prev.year,
       genres: result.genres?.length ? result.genres : prev.genres,
-      coverUrl: result.coverUrl || prev.coverUrl,
+      coverUrl: optimizeCoverUrl(result.coverUrl) || prev.coverUrl,
       ratingLabel: result.ratingLabel || prev.ratingLabel,
       sourceLookupId: result.sourceLookupId || "",
       sourceLookupProvider: result.sourceLookupProvider || ""
@@ -146,7 +171,11 @@ export default function EntryFormModal({
                 >
                   <div className="lookup-result-left">
                     <div className="lookup-thumb">
-                      {result.coverUrl ? <img src={result.coverUrl} alt="" /> : <span>🎞️</span>}
+                      {result.coverUrl ? (
+                        <img src={optimizeCoverUrl(result.coverUrl)} alt="" loading="lazy" decoding="async" />
+                      ) : (
+                        <span>🎞️</span>
+                      )}
                     </div>
                     <div>
                       <div className="lookup-result-title">{result.title}</div>
@@ -274,12 +303,20 @@ export default function EntryFormModal({
 
           <label>
             Your Name *
-            <input
+            <select
               value={entry.authorName || ""}
               onChange={(e) => setEntry((v) => ({ ...v, authorName: e.target.value }))}
-              placeholder="Display name"
               required
-            />
+            >
+              <option value="" disabled>
+                Select reviewer...
+              </option>
+              {reviewerOptions.map((name) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label>

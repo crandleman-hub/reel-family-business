@@ -1,4 +1,4 @@
-import { formatDate, mediaLabel, parseGenres, scoreColor } from "../lib/utils";
+import { formatDate, mediaLabel, optimizeCoverUrl, parseGenres, scoreColor } from "../lib/utils";
 
 export default function EntryCard({
   entry,
@@ -9,7 +9,7 @@ export default function EntryCard({
 }) {
   const genres = parseGenres(entry.genres);
   const score = Number(entry.familyScore || 0);
-  const cover = entry.coverUrl || fallbackCover;
+  const cover = optimizeCoverUrl(entry.coverUrl) || fallbackCover;
 
   return (
     <article className="entry-card">
@@ -17,6 +17,8 @@ export default function EntryCard({
         <img
           src={cover}
           alt={`${entry.title} cover`}
+          loading="lazy"
+          decoding="async"
           onError={(e) => {
             if (fallbackCover && e.currentTarget.src !== fallbackCover) {
               e.currentTarget.src = fallbackCover;

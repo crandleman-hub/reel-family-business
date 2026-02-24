@@ -26,17 +26,18 @@ A Netlify-hosted family review site for movies, shows, and books with:
 1. Create your Google Sheet and tabs (`Entries`, `Pins`)
 2. Paste `/apps-script/Code.gs` into Apps Script attached to that Sheet
 3. Run `setupSheets()`
-4. Run `addPin_("Family Admin", "YOURPIN")`
-5. Set Script Properties:
+4. Run `createFirstPin()` (edit the PIN in `Code.gs` first)
+5. Optional bulk load: run `createFamilyPins()` after replacing the placeholder PINs in the `pinMap`
+6. Set Script Properties:
    - `OMDB_API_KEY=bd507ffb`
    - `GOOGLE_BOOKS_API_KEY=...`
    - `FALLBACK_COVER_URL=https://...`
-6. Deploy Apps Script as Web App (Anyone)
-7. In Netlify environment variables set:
+7. Deploy Apps Script as Web App (Anyone)
+8. In Netlify environment variables set:
    - `APPS_SCRIPT_URL=<your web app URL>`
-8. In frontend `.env` set:
+9. In frontend `.env` set:
    - `VITE_API_MODE=proxy`
-9. Deploy to Netlify
+10. Deploy to Netlify
 
 ## Branding assets
 

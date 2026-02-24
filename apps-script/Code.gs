@@ -35,6 +35,22 @@ const ENTRY_HEADERS = [
 ];
 
 const PIN_HEADERS = ["pinLabel", "pinHash", "status", "canView", "canSubmit", "canEdit", "canDelete"];
+const FAMILY_MEMBER_NAMES = [
+  "Chris",
+  "Alycia",
+  "Jojo",
+  "Liza",
+  "Jeff",
+  "Elias",
+  "Ward",
+  "Pat",
+  "Mike",
+  "Jaunice",
+  "Josh",
+  "Cassandra",
+  "Kona",
+  "Walela"
+];
 
 function doGet(e) {
   const action = (e && e.parameter && e.parameter.action) || "health";
@@ -430,4 +446,55 @@ function addPin_(label, rawPin) {
   const pinHash = sha256_(String(rawPin || "").trim());
   sheet.appendRow([String(label || "Family PIN"), pinHash, "ACTIVE", true, true, true, true]);
   return "PIN added";
+}
+
+/**
+ * Helper you can run from the Apps Script dropdown (no arguments needed).
+ * Change the PIN below before running.
+ */
+function createFirstPin() {
+  addPin_("Family Admin", "1234");
+}
+
+/**
+ * Bulk-load family member pin rows.
+ * Edit the PIN values first, then run this once.
+ */
+function createFamilyPins() {
+  var pinMap = {
+    Chris: "1111",
+    Alycia: "2222",
+    Jojo: "3333",
+    Liza: "4444",
+    Jeff: "5555",
+    Elias: "6666",
+    Ward: "7777",
+    Pat: "8888",
+    Mike: "9999",
+    Jaunice: "1212",
+    Josh: "1313",
+    Cassandra: "1414",
+    Kona: "1515",
+    Walela: "1616"
+  };
+
+  var existing = readPins_();
+  var existingLabels = {};
+  existing.forEach(function (row) {
+    existingLabels[String(row.pinLabel || "").trim().toLowerCase()] = true;
+  });
+
+  var created = [];
+  FAMILY_MEMBER_NAMES.forEach(function (name) {
+    var labelKey = name.toLowerCase();
+    if (existingLabels[labelKey]) return;
+    var pin = String(pinMap[name] || "").trim();
+    if (!pin) return;
+    addPin_(name, pin);
+    created.push(name);
+  });
+
+  return created.length
+    ? "Created pins for: " + created.join(", ")
+    : "No new pins created (names may already exist).";
 }
